@@ -96,7 +96,7 @@ public class Main {
                 String sender = sc.nextLine();
                 System.out.println("Enter the receiver:");
                 String receiver = sc.nextLine();
-                Node node = new Node(sender, receiver, message);
+                Node node = new Node(message,sender, receiver);
                 mQueue.enQueueDemo(node);
                 System.out.println("Message added to the queue.");
 
