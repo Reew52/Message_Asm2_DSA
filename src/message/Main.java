@@ -4,6 +4,7 @@
  */
 package message;
 
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 /**
@@ -65,13 +66,15 @@ public class Main {
         return option;
     }
     
-    public static void sendMessage(boolean sendNow) {
+    public static void sendMessage(boolean sendNow, String sender, String receiver) {
         try {
             while (!mQueue.isEmpty()) {
                 String message = mQueue.deQueueDemo();
                 if (sendNow) {
-                    Node node = new Node(message);
+                    Node node = new Node(message, sender, receiver);
+                    node.setSendTime(LocalDateTime.now());
                     mStack.push(node);
+                    node.setReceiveTime(LocalDateTime.now());
                 }
             }
             if (sendNow) {
@@ -89,7 +92,11 @@ public class Main {
             if (message.length() > 250) {
                 System.out.println("Error: Message length should be less than 250 characters.");
             } else {
-                Node node = new Node(message);
+                System.out.println("Enter the sender:");
+                String sender = sc.nextLine();
+                System.out.println("Enter the receiver:");
+                String receiver = sc.nextLine();
+                Node node = new Node(sender, receiver, message);
                 mQueue.enQueueDemo(node);
                 System.out.println("Message added to the queue.");
 
@@ -99,14 +106,14 @@ public class Main {
                 if (response.equalsIgnoreCase("Y")) {
                     // Call Case 2 to send the message
                     System.out.println("Sending message...");
-                    sendMessage(true);
+                    sendMessage(true, sender, receiver);
                     response();
                 } else if (response.equalsIgnoreCase("N")) {
-                    sendMessage(false); // don't send the message now
+                    sendMessage(false, sender, receiver); // don't send the message now
                     System.out.println("Message not sent!");
                     response();
                 } else {
-                    sendMessage(false); // don't send the message now
+                    sendMessage(false, sender, receiver); // don't send the message now
                     System.out.println("Exit");
                 }
             }
