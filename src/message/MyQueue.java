@@ -10,8 +10,8 @@ package message;
  */
 public class MyQueue {
     private int length;
-    private Node front;
-    private Node rear;
+    private Message front;
+    private Message rear;
 
     public MyQueue() {
         length = 0;
@@ -19,7 +19,7 @@ public class MyQueue {
     }
     
     // adds
-    public void enQueueDemo(Node message){
+    public void enQueueDemo(Message message){
         if (isEmpty()) {
             front = message;
         }else{
@@ -59,7 +59,7 @@ public class MyQueue {
     
     public String toString(){
         String result = "";
-        Node current = front;
+        Message current = front;
         while(current != null){
             result = result + current.toString() + "\n";
             current = current.getNext();

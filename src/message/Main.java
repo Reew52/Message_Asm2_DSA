@@ -28,7 +28,6 @@ public class Main {
                     messageReceived();
                 break;
                 case 3: 
-                    messageNotSent();
                 break;
                 case 4: 
                     messageReceived();
@@ -71,7 +70,7 @@ public class Main {
             while (!mQueue.isEmpty()) {
                 String message = mQueue.deQueueDemo();
                 if (sendNow) {
-                    Node node = new Node(message, sender, receiver);
+                    Message node = new Message(message, sender, receiver);
                     node.setSendTime(LocalDateTime.now());
                     mStack.push(node);
                     node.setReceiveTime(LocalDateTime.now());
@@ -96,7 +95,7 @@ public class Main {
                 String sender = sc.nextLine();
                 System.out.println("Enter the receiver:");
                 String receiver = sc.nextLine();
-                Node node = new Node(message,sender, receiver);
+                Message node = new Message(message,sender, receiver);
                 mQueue.enQueueDemo(node);
                 System.out.println("Message added to the queue.");
 
@@ -126,7 +125,13 @@ public class Main {
     public static void messageReceived() {
         try {
             System.out.println("Message in Stack is :");
+            System.out.println("+----------+------------+------------------------------------------+---------------------------+---------------------------+");
+            String format = "|%-10s| %-10s | %-40s | %-25s | %-25s |\n";
+            System.out.format(format, "Sender", "Receiver", "Message", "Send Time", "Receive Time");
+            System.out.println("+----------+------------+------------------------------------------+---------------------------+---------------------------+");
             System.out.println(mStack.toString());
+            System.out.println("+----------+------------+------------------------------------------+---------------------------+---------------------------+");
+            System.out.println("End!");
         } catch (Exception e) {
             System.out.println("Error:" + e.getMessage());
         }
@@ -142,12 +147,4 @@ public class Main {
         }
     }
     
-    public static void messageNotSent() {
-        try {
-            System.out.println("Message in Queue is :");
-            System.out.println(mQueue.toString());
-        } catch (Exception e) {
-            System.out.println("Error:" + e.getMessage());
-        }
-    }
 }

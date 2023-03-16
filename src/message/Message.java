@@ -10,15 +10,15 @@ package message;
  */
 import java.time.LocalDateTime;
 
-public class Node {
-    private Node next;
+public class Message {
+    private Message next;
     private String message;
     private String sender;
     private String receiver;
     private LocalDateTime sendTime;
     private LocalDateTime receiveTime;
     
-    public Node() {
+    public Message() {
         next = null;
         message = "";
         sender = "";
@@ -27,7 +27,7 @@ public class Node {
         receiveTime = null;
     }
 
-    public Node(String message, String sender, String receiver) {
+    public Message(String message, String sender, String receiver) {
         this.next = null;
         this.message = message;
         this.sender = sender;
@@ -36,11 +36,11 @@ public class Node {
         this.receiveTime = null;
     }
 
-    public Node getNext() {
+    public Message getNext() {
         return next;
     }
 
-    public void setNext(Node next) {
+    public void setNext(Message next) {
         this.next = next;
     }
 
@@ -86,12 +86,7 @@ public class Node {
 
     @Override
     public String toString() {
-        return "Node{" +
-            "sender='" + sender + '\'' +
-            ", receiver='" + receiver + '\'' +
-            ", message='" + message + '\'' +
-            ", sendTime=" + sendTime +
-            ", receiveTime=" + receiveTime +
-            '}';
+        return String.format("|%-10s| %-10s | %-40s | %-25s | %-25s |", 
+        sender, receiver, message, sendTime, receiveTime);
     }
 }

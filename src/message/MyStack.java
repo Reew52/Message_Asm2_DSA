@@ -11,14 +11,14 @@ package message;
 public class MyStack {
 
     private int length;
-    private Node top;
+    private Message top;
 
     public MyStack() {
         length = 0;
         top = null;
     }
 
-    public void push(Node message) {
+    public void push(Message message) {
         message.setNext(top);
         top = message;
         length++;
@@ -52,12 +52,16 @@ public class MyStack {
 
     public String toString() {
         String result = "";
-        Node current = top;
+        Message current = top;
         while (current != null) {
-            result = result + current.toString() + "\n";
+            result = result + current.toString();
             current = current.getNext();
         }
         return result;
+    }
+
+    public Message getTop() {
+        return top;
     }
 
     public void print_top() {
