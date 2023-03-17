@@ -27,12 +27,7 @@ public class Main {
                 case 2: 
                     messageReceived();
                 break;
-                case 3: 
-                break;
-                case 4: 
-                    messageReceived();
-                break;
-                case 5:{
+                case 3:{
                     System.out.println("Closing!");
                     break;
                 }
@@ -40,7 +35,7 @@ public class Main {
                 default:
                     throw new AssertionError();
             }
-        } while (option != 5);
+        } while (option != 3);
         sc.close();
         
     }
@@ -54,9 +49,7 @@ public class Main {
         System.out.println("|                                                 |");
         System.out.println("|     1. Send Message                             |");
         System.out.println("|     2. Received message                         |");
-        System.out.println("|     3. Message not sent                         |");
-        System.out.println("|     4. Delete messages                          |");
-        System.out.println("|     5. Exit                                     |");
+        System.out.println("|     3. Exit                                     |");
         System.out.println("|                                                 |");
         System.out.println("+-------------------------------------------------+");
 
