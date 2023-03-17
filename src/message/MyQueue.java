@@ -19,7 +19,7 @@ public class MyQueue {
     }
     
     // adds
-    public void enQueueDemo(Message message){
+    public void enQueue(Message message){
         if (isEmpty()) {
             front = message;
         }else{
@@ -29,7 +29,7 @@ public class MyQueue {
         length++;
     }
     
-    public String deQueueDemo(){
+    public String deQueue(){
         if (isEmpty()) {
             return "Queue is empty";
         }else{

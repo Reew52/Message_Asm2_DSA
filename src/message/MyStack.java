@@ -54,7 +54,7 @@ public class MyStack {
         String result = "";
         Message current = top;
         while (current != null) {
-            result = result + current.toString();
+            result = result + current.toString() + "\n";
             current = current.getNext();
         }
         return result;

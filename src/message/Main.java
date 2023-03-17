@@ -61,7 +61,7 @@ public class Main {
     public static void sendMessage(boolean sendNow, String sender, String receiver) {
         try {
             while (!mQueue.isEmpty()) {
-                String message = mQueue.deQueueDemo();
+                String message = mQueue.deQueue();
                 if (sendNow) {
                     Message node = new Message(message, sender, receiver);
                     node.setSendTime(LocalDateTime.now());
@@ -89,7 +89,7 @@ public class Main {
                 System.out.println("Enter the receiver:");
                 String receiver = sc.nextLine();
                 Message node = new Message(message,sender, receiver);
-                mQueue.enQueueDemo(node);
+                mQueue.enQueue(node);
                 System.out.println("Message added to the queue.");
 
                 // Ask user if they want to send the message right away
