@@ -4,6 +4,8 @@
  */
 package message;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Dell
@@ -36,5 +38,41 @@ public class MyStack {
             current = current.getNext();
         }
         return result;
+    }
+    
+    public String pop() {
+        if (isEmpty()) {
+            return "Stack is empty";
+        } else {
+            String result = top.getMessage();
+            top = top.getNext();
+            length--;
+            return result;
+        }
+    }
+    
+    public void clear() {
+        length = 0;
+        top = null;
+    }
+    
+    public ArrayList<Message> search(String keyword) {
+        ArrayList<Message> results = new ArrayList<Message>();
+        Message current = top;
+        while (current != null) {
+            if (current.getMessage().contains(keyword)) {
+                results.add(current);
+            }
+            current = current.getNext();
+        }
+        return results;
+    }
+    
+    public void printTop() {
+        if (isEmpty()) {
+            System.out.println("Stack is empty");
+        } else {
+            System.out.println(top.toString()); // thêm thông tin để in giá trị của top
+        }
     }
 }

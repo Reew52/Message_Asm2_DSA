@@ -7,6 +7,7 @@ package message;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -51,14 +52,22 @@ public class Main {
                                 case 2:
                                     messageReceived();
                                     break;
-                                case 3: {
+                                case 3:
+                                    search();
+                                    break;
+                                case 4: 
+                                    deleteTopStack();
+                                    break;
+                                case 5: 
+                                    deleteAllStack();
+                                    break;
+                                case 6: 
                                     System.out.println("Closing!");
                                     break;
-                                }
                                 default:
                                     throw new AssertionError();
                             }
-                        } while (option != 3);
+                        } while (option != 6);
                         sc.close();
 
                     } else if (tokens[0].equals(username)) { // if username is correct but password is wrong
@@ -89,7 +98,10 @@ public class Main {
         System.out.println("|                                                 |");
         System.out.println("|     1. Send Message                             |");
         System.out.println("|     2. Received message                         |");
-        System.out.println("|     3. Exit                                     |");
+        System.out.println("|     3. Message Search                           |");
+        System.out.println("|     4. Delete the message you just sent         |");
+        System.out.println("|     5. Delete all sent messages                 |");
+        System.out.println("|     6. Exit                                     |");
         System.out.println("|                                                 |");
         System.out.println("+-------------------------------------------------+");
 
@@ -157,14 +169,18 @@ public class Main {
     
     public static void messageReceived() {
         try {
-            System.out.println("Message in Stack is :");
-            System.out.println("+----------+------------+------------------------------------------+---------------------------+---------------------------+");
-            String format = "|%-10s| %-10s | %-40s | %-25s | %-25s |\n";
-            System.out.format(format, "Sender", "Receiver", "Message", "Send Time", "Receive Time");
-            System.out.println("+----------+------------+------------------------------------------+---------------------------+---------------------------+");
-            System.out.println(mStack.toString());
-            System.out.println("+----------+------------+------------------------------------------+---------------------------+---------------------------+");
-            System.out.println("End!");
+            if (!mStack.isEmpty()) {
+                System.out.println("Sent messages list :");
+                System.out.println("+----------+------------+------------------------------------------+---------------------------+---------------------------+");
+                String format = "|%-10s| %-10s | %-40s | %-25s | %-25s |\n";
+                System.out.format(format, "Sender", "Receiver", "Message", "Send Time", "Receive Time");
+                System.out.println("+----------+------------+------------------------------------------+---------------------------+---------------------------+");
+                System.out.println(mStack.toString());
+                System.out.println("+----------+------------+------------------------------------------+---------------------------+---------------------------+");
+                System.out.println("End!");
+            } else {
+                System.out.println("Sent message list is empty!");
+            }
         } catch (Exception e) {
             System.out.println("Error:" + e.getMessage());
         }
@@ -180,4 +196,73 @@ public class Main {
         }
     }
     
+    public static void search() {
+        try {
+            System.out.println("Enter keyword to search:");
+            String keyword = sc.nextLine();
+            ArrayList<Message> searchResults = mStack.search(keyword);
+            if (searchResults.isEmpty()) {
+                System.out.println("No matching messages found.");
+            } else {
+                System.out.println("Matching messages:");
+                for (Message result : searchResults) {
+                    System.out.println("+----------+------------+------------------------------------------+---------------------------+---------------------------+");
+                    String format = "|%-10s| %-10s | %-40s | %-25s | %-25s |\n";
+                    System.out.format(format, "Sender", "Receiver", "Message", "Send Time", "Receive Time");
+                    System.out.println("+----------+------------+------------------------------------------+---------------------------+---------------------------+");
+                    System.out.println(result.toString());
+                    System.out.println("+----------+------------+------------------------------------------+---------------------------+---------------------------+");
+                    System.out.println("End!");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error:" + e.getMessage());
+        }
+    }
+    
+    public static void deleteTopStack() {
+        try {
+            if (!mStack.isEmpty()) {
+                System.out.println("Message just sent :");
+                System.out.println("+----------+------------+------------------------------------------+---------------------------+---------------------------+");
+                String format = "|%-10s| %-10s | %-40s | %-25s | %-25s |\n";
+                System.out.format(format, "Sender", "Receiver", "Message", "Send Time", "Receive Time");
+                System.out.println("+----------+------------+------------------------------------------+---------------------------+---------------------------+");
+                mStack.printTop();
+                System.out.println("+----------+------------+------------------------------------------+---------------------------+---------------------------+");
+                System.out.println("Are you sure to delete sent messages? (Y/N)");
+                String response = sc.nextLine();
+                if (response.equalsIgnoreCase("Y")) {
+                    String message = mStack.pop();
+                    System.out.println("Deleted message: " + message);
+                    System.out.println("End!");
+                } else {
+                    System.out.println("Operation canceled.");
+                }
+            } else {
+                System.out.println("Sent message list is empty!!");
+            }
+        } catch (Exception e) {
+            System.out.println("Error:" + e.getMessage());
+        }
+    }
+    
+    public static void deleteAllStack() {
+        try {
+            System.out.println("Are you sure to delete all sent messages? (Y/N)");
+            String response = sc.nextLine();
+            if (response.equalsIgnoreCase("Y")) {
+                mStack.clear();
+            } else {
+                System.out.println("Operation canceled.");
+            }
+            // Print a message if the stack is empty
+            if (mStack.isEmpty()) {
+                System.out.println("Sent message list is empty!");
+            }
+        } catch (Exception e) {
+            System.out.println("Error:" + e.getMessage());
+        }
+    }
+
 }

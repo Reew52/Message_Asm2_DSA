@@ -46,5 +46,5 @@ public class MyQueue {
     public boolean isEmpty(){
         return(length == 0);
     }
-      
+
 }
