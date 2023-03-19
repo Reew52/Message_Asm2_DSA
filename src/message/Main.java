@@ -4,6 +4,8 @@
  */
 package message;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
@@ -16,28 +18,66 @@ public class Main {
     private static MyQueue mQueue = new MyQueue();
     private static MyStack mStack = new MyStack();
     
-    public static void main(String[] args) {              
-        int option;
-        do {
-            option = printMenu();
-            switch (option) {
-                case 1:
-                    inputMessage();
-                    break;
-                case 2: 
-                    messageReceived();
-                break;
-                case 3:{
-                    System.out.println("Closing!");
-                    break;
+    public static void main(String[] args) {
+        boolean loggedIn = false;
+        while (!loggedIn) {
+            System.out.println("=============== Login ==============");
+            System.out.print("Enter username: ");
+            String username = sc.next();
+
+            System.out.print("Enter password: ");
+            String password = sc.next();
+
+            boolean invalidPassword = false; // Add this variable to check password match
+
+            try {
+                File file = new File("login.txt");
+                Scanner fileScanner = new Scanner(file);
+
+                while (fileScanner.hasNextLine()) {
+                    String line = fileScanner.nextLine();
+                    String[] tokens = line.split(":");
+
+                    if (tokens[0].equals(username) && tokens[1].equals(password)) {
+                        System.out.println("Login successful!");
+                        loggedIn = true;
+                        int option;
+                        do {
+                            option = printMenu();
+                            switch (option) {
+                                case 1:
+                                    inputMessage();
+                                    break;
+                                case 2:
+                                    messageReceived();
+                                    break;
+                                case 3: {
+                                    System.out.println("Closing!");
+                                    break;
+                                }
+                                default:
+                                    throw new AssertionError();
+                            }
+                        } while (option != 3);
+                        sc.close();
+
+                    } else if (tokens[0].equals(username)) { // if username is correct but password is wrong
+                        invalidPassword = true;
+                    }
                 }
-                    
-                default:
-                    throw new AssertionError();
+
+                if (!loggedIn) {
+                    if (invalidPassword) {
+                        System.out.println("Invalid password. Please try again.");
+                    } else {
+                        System.out.println("Invalid username or password. Please try again.");
+                    }
+                }
+
+            } catch (FileNotFoundException e) {
+                System.out.println("File not found.");
             }
-        } while (option != 3);
-        sc.close();
-        
+        }
     }
     
     public static int printMenu() {

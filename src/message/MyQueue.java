@@ -43,31 +43,8 @@ public class MyQueue {
         }
     }
     
-    public String first() throws Exception{
-        if(isEmpty()){
-            throw new Exception();
-        }
-        return front.getMessage();
-    }
-    public int size(){
-        return length;
-    }
-    
     public boolean isEmpty(){
         return(length == 0);
     }
-    
-    public String toString(){
-        String result = "";
-        Message current = front;
-        while(current != null){
-            result = result + current.toString() + "\n";
-            current = current.getNext();
-        }
-        return result;
-    }
-    
-    public void print_frontRear(){
-        System.out.println("Front: " + front.getMessage() + ", Rear: " + rear.getMessage()); // thêm thông tin để in giá trị front và rear
-    }
+      
 }
