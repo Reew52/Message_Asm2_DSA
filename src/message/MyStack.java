@@ -72,7 +72,7 @@ public class MyStack {
         if (isEmpty()) {
             System.out.println("Stack is empty");
         } else {
-            System.out.println(top.toString()); // thêm thông tin để in giá trị của top
+            System.out.println(top.toString());
         }
     }
 }

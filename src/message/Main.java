@@ -122,7 +122,7 @@ public class Main {
                 }
             }
             if (sendNow) {
-                System.out.println("Messages sent to Stack.");
+                System.out.println("Message sent successfully!");
             }
         } catch (Exception e) {
             System.out.println("Error:" + e.getMessage());
@@ -131,37 +131,54 @@ public class Main {
     
     public static void inputMessage() {
         try {
-            System.out.println("Enter the message (less than 250 characters):");
-            String message = sc.nextLine();
-            if (message.length() > 250) {
-                System.out.println("Error: Message length should be less than 250 characters.");
-            } else {
-                System.out.println("Enter the sender:");
-                String sender = sc.nextLine();
-                System.out.println("Enter the receiver:");
-                String receiver = sc.nextLine();
-                Message node = new Message(message,sender, receiver);
-                mQueue.enQueue(node);
-                System.out.println("Message added to the queue.");
+            String message = null;
+            String sender = null;
+            String receiver = null;
 
-                // Ask user if they want to send the message right away
-                System.out.println("Do you want to send the message now? (Y/N/Enter to exit)");
-                String response = sc.nextLine();
-                if (response.equalsIgnoreCase("Y")) {
-                    // Call Case 2 to send the message
-                    System.out.println("Sending message...");
-                    sendMessage(true, sender, receiver);
-                    response();
-                } else if (response.equalsIgnoreCase("N")) {
-                    sendMessage(false, sender, receiver); // don't send the message now
-                    System.out.println("Message not sent!");
-                    response();
+            // Loop until all fields are filled
+            while (message == null || sender == null || receiver == null) {
+                System.out.println("Enter the message (less than 250 characters):");
+                message = sc.nextLine();
+                if (message.length() > 250) {
+                    System.out.println("Error: Message length should be less than 250 characters.");
+                    message = null;
                 } else {
-                    sendMessage(false, sender, receiver); // don't send the message now
-                    System.out.println("Exit");
+                    System.out.println("Enter the sender:");
+                    sender = sc.nextLine();
+                    if (sender.length() == 0) {
+                        System.out.println("Error: Sender field cannot be empty.");
+                        sender = null;
+                        continue;
+                    }
+                    System.out.println("Enter the receiver:");
+                    receiver = sc.nextLine();
+                    if (receiver.length() == 0) {
+                        System.out.println("Error: Receiver field cannot be empty.");
+                        receiver = null;
+                    }
                 }
             }
 
+            Message node = new Message(message, sender, receiver);
+            mQueue.enQueue(node);
+            System.out.println("Message added to the queue.");
+
+            // Ask user if they want to send the message right away
+            System.out.println("Do you want to send the message now? (Y/N/Enter to exit)");
+            String response = sc.nextLine();
+            if (response.equalsIgnoreCase("Y")) {
+                // Call Case 2 to send the message
+                System.out.println("Sending message...");
+                sendMessage(true, sender, receiver);
+                response();
+            } else if (response.equalsIgnoreCase("N")) {
+                sendMessage(false, sender, receiver); // don't send the message now
+                System.out.println("Message not sent!");
+                response();
+            } else {
+                sendMessage(false, sender, receiver); // don't send the message now
+                System.out.println("Exit");
+            }
         } catch (Exception e) {
             System.out.println("Error:" + e.getMessage());
         }
