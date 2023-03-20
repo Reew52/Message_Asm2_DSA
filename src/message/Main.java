@@ -222,15 +222,15 @@ public class Main {
                 System.out.println("No matching messages found.");
             } else {
                 System.out.println("Matching messages:");
+                System.out.println("+----------+------------+------------------------------------------+---------------------------+---------------------------+");
+                String format = "|%-10s| %-10s | %-40s | %-25s | %-25s |\n";
+                System.out.format(format, "Sender", "Receiver", "Message", "Send Time", "Receive Time");
+                System.out.println("+----------+------------+------------------------------------------+---------------------------+---------------------------+");
                 for (Message result : searchResults) {
-                    System.out.println("+----------+------------+------------------------------------------+---------------------------+---------------------------+");
-                    String format = "|%-10s| %-10s | %-40s | %-25s | %-25s |\n";
-                    System.out.format(format, "Sender", "Receiver", "Message", "Send Time", "Receive Time");
-                    System.out.println("+----------+------------+------------------------------------------+---------------------------+---------------------------+");
                     System.out.println(result.toString());
-                    System.out.println("+----------+------------+------------------------------------------+---------------------------+---------------------------+");
-                    System.out.println("End!");
                 }
+                System.out.println("+----------+------------+------------------------------------------+---------------------------+---------------------------+");
+                System.out.println("End!");
             }
         } catch (Exception e) {
             System.out.println("Error:" + e.getMessage());
