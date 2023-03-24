@@ -11,10 +11,8 @@ import java.time.LocalDateTime;
  * @author Dell
  */
 public class PersonMessage extends Message {
-    private String sender;
-    private String receiver;
-    private LocalDateTime sendTime;
-    private LocalDateTime receiveTime;
+    private String sender, receiver;
+    private LocalDateTime sendTime, receiveTime;
     
     public PersonMessage(String message, String sender, String receiver) {
         super(message);
