@@ -10,7 +10,7 @@ package message;
  */
 import java.time.LocalDateTime;
 
-public class Message {
+public abstract class Message {
     private Message next;
     private String message;
     private String sender;

@@ -30,6 +30,7 @@ public class MyStack {
         return (length == 0);
     }
 
+    @Override
     public String toString() {
         String result = "";
         Message current = top;
