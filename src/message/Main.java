@@ -115,7 +115,7 @@ public class Main {
             while (!mQueue.isEmpty()) {
                 String message = mQueue.deQueue();
                 if (sendNow) {
-                    Message node = new Message(message, sender, receiver) {};
+                    PersonMessage node = new PersonMessage(message, sender, receiver) {};
                     node.setSendTime(LocalDateTime.now());
                     mStack.push(node);
                     node.setReceiveTime(LocalDateTime.now());
@@ -159,7 +159,7 @@ public class Main {
                 }
             }
 
-            Message node = new Message(message, sender, receiver) {};
+            PersonMessage node = new PersonMessage(message, sender, receiver) {};
             mQueue.enQueue(node);
             System.out.println("Message added to the queue.");
 
