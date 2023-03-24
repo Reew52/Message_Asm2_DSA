@@ -17,7 +17,7 @@ public class MyQueue {
         length = 0;
         front = rear = null;
     }
-    
+     
     // adds
     public void enQueue(Message message){
         if (isEmpty()) {
@@ -47,4 +47,27 @@ public class MyQueue {
         return(length == 0);
     }
 
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
+
+    public Message getFront() {
+        return front;
+    }
+
+    public void setFront(Message front) {
+        this.front = front;
+    }
+
+    public Message getRear() {
+        return rear;
+    }
+
+    public void setRear(Message rear) {
+        this.rear = rear;
+    }
 }
