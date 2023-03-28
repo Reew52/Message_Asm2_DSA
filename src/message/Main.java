@@ -217,6 +217,9 @@ public class Main {
         try {
             System.out.println("Enter keyword to search:");
             String keyword = sc.nextLine();
+            if (keyword == null || keyword.trim().isEmpty()) {
+                throw new IllegalArgumentException("Keyword cannot be empty.");
+            }
             ArrayList<Message> searchResults = mStack.search(keyword);
             if (searchResults.isEmpty()) {
                 System.out.println("No matching messages found.");
@@ -232,6 +235,8 @@ public class Main {
                 System.out.println("+----------+------------+------------------------------------------+---------------------------+---------------------------+");
                 System.out.println("End!");
             }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
         } catch (Exception e) {
             System.out.println("Error:" + e.getMessage());
         }
