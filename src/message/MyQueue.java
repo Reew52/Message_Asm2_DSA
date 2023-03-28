@@ -17,7 +17,7 @@ public class MyQueue {
         length = 0;
         front = rear = null;
     }
-     
+    
     // adds
     public void enQueue(Message message){
         if (isEmpty()) {

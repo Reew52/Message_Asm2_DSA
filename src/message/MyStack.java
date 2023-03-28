@@ -80,18 +80,18 @@ public class MyStack {
     public int getLength() {
         return length;
     }
-
+    
     public void setLength(int length) {
         this.length = length;
     }
-
+    
     public Message getTop() {
         return top;
     }
-
+    
     public void setTop(Message top) {
         this.top = top;
-    }
+}
     
     
 }
