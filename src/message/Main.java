@@ -44,6 +44,7 @@ public class Main {
                         loggedIn = true;
                         int option;
                         do {
+                            sc = new Scanner(System.in);
                             option = printMenu();
                             switch (option) {
                                 case 1:
@@ -65,7 +66,8 @@ public class Main {
                                     System.out.println("Closing!");
                                     break;
                                 default:
-                                    throw new AssertionError();
+                                    System.out.println("Wrong input");
+                                    break;
                             }
                         } while (option != 6);
                         sc.close();
@@ -104,9 +106,14 @@ public class Main {
         System.out.println("|     6. Exit                                     |");
         System.out.println("|                                                 |");
         System.out.println("+-------------------------------------------------+");
-
-        int option = sc.nextInt();
-        sc.nextLine();
+        int option = 0;
+        try {
+            option = sc.nextInt();
+            sc.nextLine();
+            
+        } catch (Exception e) {
+            System.out.println("Error:" + e.getMessage());
+        }
         return option;
     }
     
